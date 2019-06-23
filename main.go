@@ -9,7 +9,7 @@ import (
 )
 
 type Person struct {
-	ID        int    `json:"id"`
+	ID        string `json:"id"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 }
@@ -25,7 +25,14 @@ func getPeople(w http.ResponseWriter, r *http.Request) {
 // Get required person
 func getRequiredPerson(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(people)
+	params := mux.Vars(r)
+	for _, item := range people {
+		if item.ID == params["id"] {
+			json.NewEncoder(w).Encode(item)
+			return
+		}
+	}
+	json.NewEncoder(w).Encode(&Person{})
 }
 
 // Create a new person
@@ -41,8 +48,8 @@ func deletePerson(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	people = append(people, Person{1, "Wajahat", "Ali"})
-	people = append(people, Person{2, "Ali", "Iftikhar"})
+	people = append(people, Person{"1", "Wajahat", "Ali"})
+	people = append(people, Person{"2", "Ali", "Iftikhar"})
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", getPeople).Methods("GET")
