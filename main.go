@@ -35,28 +35,13 @@ func getRequiredPerson(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&Person{})
 }
 
-// Create a new person
-func createPerson(w http.ResponseWriter, r *http.Request) {
-}
-
-// Update an existing person
-func updatePerson(w http.ResponseWriter, r *http.Request) {
-}
-
-// Delete a person
-func deletePerson(w http.ResponseWriter, r *http.Request) {
-}
-
 func main() {
-	people = append(people, Person{"1", "Wajahat", "Ali"})
+	people = append(people, Person{"1", "Ghalib", "Ahmed"})
 	people = append(people, Person{"2", "Ali", "Iftikhar"})
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", getPeople).Methods("GET")
 	router.HandleFunc("/{id}", getRequiredPerson).Methods("GET")
-	router.HandleFunc("/", createPerson).Methods("POST")
-	router.HandleFunc("/{id}", updatePerson).Methods("PUT")
-	router.HandleFunc("/{id}", deletePerson).Methods("DELETE")
 
 	log.Println("Starting server at 3000")
 	output := http.ListenAndServe(":3000", router)
