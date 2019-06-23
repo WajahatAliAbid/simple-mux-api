@@ -38,6 +38,6 @@ func main() {
 	router.HandleFunc("/{id}", deletePerson).Methods("DELETE")
 	log.Println("Starting server at 3000")
 
-	output =: http.ListenAndServe(":3000", router)
+	output := http.ListenAndServe(":3000", router)
 	log.Fatal(output)
 }

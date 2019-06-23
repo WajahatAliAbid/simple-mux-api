@@ -1,5 +1,5 @@
 package main
 
 type Person struct {
-	firstName, lastname string
+	firstName, lastName string
 }
