@@ -33,10 +33,10 @@ func main() {
 
 	router.HandleFunc("/", getPeople).Methods("GET")
 	router.HandleFunc("/{id}", getRequiredPerson).Methods("GET")
-	r.HandleFunc("/", createPerson).Methods("POST")
-	r.HandleFunc("/{id}", updatePerson).Methods("PUT")
-	r.HandleFunc("/{id}", deletePerson).Methods("DELETE")
-	log.Println("Hello World")
+	router.HandleFunc("/", createPerson).Methods("POST")
+	router.HandleFunc("/{id}", updatePerson).Methods("PUT")
+	router.HandleFunc("/{id}", deletePerson).Methods("DELETE")
+	log.Println("Starting server at 3000")
 
 	http.ListenAndServe(":3000", router)
 }
